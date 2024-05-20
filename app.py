@@ -1,4 +1,3 @@
-%%file app.py
 
 import pickle
 import numpy as np
