@@ -1,4 +1,4 @@
-FROM python:3.11-slim-buster
+, 'FROM python:3.11-slim-buster
 
 WORKDIR /app
 
@@ -11,4 +11,4 @@ COPY app.py .
 ENV FLASK_APP=app
 
 EXPOSE 8000
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000", "predict_get?sl=6.3&pl=2.6"]
