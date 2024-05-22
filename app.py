@@ -44,7 +44,7 @@ model.fit(X_train, y_train)
 @app.route('/', methods=['GET'])
 def predict():
     # Przykładowe dane wejściowe
-    data = np.array([3, 3])
+    data = np.array([3, 7])
     prediction = model.predict(data)
     return jsonify({'prediction': prediction.tolist()})
 
