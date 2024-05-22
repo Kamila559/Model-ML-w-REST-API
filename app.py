@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 import numpy as np
+from sklearn.datasets import load_iris
 
 app = Flask(__name__)
 
@@ -30,8 +31,12 @@ class Perceptron:
 # Stworzenie modelu perceptron
 model = Perceptron()
 # Przykładowe dane treningowe
-X_train = np.array([[2, 2], [3, 3], [4, 4]])
-y_train = np.array([1, -1, 1])
+iris = load_iris()
+df = pd.DataFrame(data= np.c_[iris['data'], iris['target']], columns= iris['feature_names'] + ['target'])
+X_train = df.iloc[:100,[0,2]].values
+y_train = df.iloc[0:100,4].values
+y_train = np.where(y == 0, -1, 1)
+
 # Trenowanie modelu
 model.fit(X_train, y_train)
 
