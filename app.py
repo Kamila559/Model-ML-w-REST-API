@@ -36,7 +36,7 @@ iris = load_iris()
 df = pd.DataFrame(data= np.c_[iris['data'], iris['target']], columns= iris['feature_names'] + ['target'])
 X_train = df.iloc[:100,[0,2]].values
 y_train = df.iloc[0:100,4].values
-y_train = np.where(y == 0, -1, 1)
+y_train = np.where(y_train == 0, -1, 1)
 
 # Trenowanie modelu
 model.fit(X_train, y_train)
