@@ -1,4 +1,3 @@
-
 import pickle
 import numpy as np
 from flask import Flask, request, jsonify
@@ -10,7 +9,7 @@ class Perceptron():
         self.n_iter = n_iter
     
     def fit(self, X, y):
-        self.w_ = [random.uniform(-1.0, 1.0) for _ in range(1+X.shape[1])] 
+        self.w_ = np.zeros(1 + X.shape[1])
         self.errors_ = []
         
         for _ in range(self.n_iter):
@@ -24,10 +23,10 @@ class Perceptron():
         return self
     
     def net_input(self, X):
-        return np.dot(X, self.w_[1:])+self.w_[0]
+        return np.dot(X, self.w_[1:]) + self.w_[0]
     
     def predict(self, X):
-        return np.where(self.net_input(X)>=0.0, 1, -1)
+        return np.where(self.net_input(X) >= 0.0, 1, -1)
 
 # Create a flask
 app = Flask(__name__)
@@ -38,7 +37,7 @@ def post_predict():
     sepal_length = 6.3
     petal_length = 2.6
     
-    features = [sepal_length, petal_length]
+    features = np.array([[sepal_length, petal_length]])
 
     # Load pickled model file
     with open('model.pkl',"rb") as picklefile:
@@ -46,7 +45,7 @@ def post_predict():
         
     # Predict the class using the model
     predicted_class = int(model.predict(features))
-    output = dict(features=features, predicted_class=predicted_class)
+    output = dict(features=features.tolist(), predicted_class=predicted_class)
     # Return a json object containing the features and prediction
     return jsonify(output)
 
