@@ -31,11 +31,7 @@ def read_data():
     y = np.where(y == 0, -1, 1)
     return X, y
 
-@app.route('/')
-def say_hello():
-    return "Perceptron model"
-
-@app.route('/fit_perceptron', methods=['POST'])
+@app.route('/', methods=['POST'])
 def fit_perceptron():
     X, y = read_data()
     
@@ -45,7 +41,7 @@ def fit_perceptron():
     weights = perceptron.w_
     errors = perceptron.errors_
 
-    return jsonify({'weights': weights.tolist(), 'errors': errors})
+    return weights
 
 if __name__ == '__main__':
     app.run(debug=True)
