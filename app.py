@@ -7,6 +7,7 @@ class Perceptron:
     def __init__(self, n_iter=10, eta=0.01):
         self.n_iter = n_iter
         self.eta = eta
+        self.errors_ = []
         
     def fit(self, X, y):
         self.w_ = np.zeros(1 + X.shape[1])
@@ -34,7 +35,7 @@ y_train = np.array([1, -1, 1])
 # Trenowanie modelu
 model.fit(X_train, y_train)
 
-@app.route('/predict', methods=['GET'])
+@app.route('/', methods=['GET'])
 def predict():
     # Przykładowe dane wejściowe
     data = np.array([3, 3])
