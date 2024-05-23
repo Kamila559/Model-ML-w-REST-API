@@ -48,7 +48,7 @@ app = Flask(__name__)
 def predict():
     data = np.array([3, 7]).reshape(1, -1)  
     prediction = model.predict(data)
-    return jsonify({'prediction': int(prediction[0])}) 
+    return jsonify({'prediction': int(prediction[0]), 'errors': model.errors_}) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
